@@ -1,0 +1,47 @@
+package main
+
+import (
+	"fmt"
+)
+
+func stack_imp(text string) {
+	top := -1
+	stack := make([]byte, len(text))
+
+	for i := 0; i < len(text); i++ {
+		
+		if top != -1 {
+			
+			if text[i]-2 == stack[top] || text[i]-1 == stack[top] {
+				top--
+			} else {
+				top++
+				stack[top] = text[i]
+			}
+		} else {
+			top++
+			stack[top] = text[i]
+		}
+	}
+	
+	if top == -1 {
+		fmt.Println("Yes")
+	} else {
+		fmt.Println("No")
+	}
+
+}
+func main() {
+	var n int
+	fmt.Scan(&n)
+	text := make([]string, n)
+	for i := 0; i < n-1; i++ {
+		fmt.Scan(&text[i])
+	}
+	fmt.Scan(&text[n-1])
+	for i := 0; i < n; i++ {
+		stack_imp((text[i]))
+	}
+
+	return
+}
