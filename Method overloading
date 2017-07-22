@@ -1,0 +1,28 @@
+package main
+
+import "fmt"
+
+type Human struct {
+	Name string
+	age  int
+	sex  string
+}
+
+type Employee struct {
+	Human
+	salary int
+}
+
+func (greet *Human) sayHi() {
+	fmt.Printf("Hello %s your are %s of age %d", greet.Name, greet.sex, greet.age)
+}
+func (inform *Employee) sayHi() {
+
+	fmt.Printf("Hello", inform.Name, "your salary is", inform.salary, "your are ", inform.sex, "of age", inform.age)
+}
+func main() {
+	h := Human{"Manikanta", 24, "Male"}
+	E := Employee{Human{"raj", 22, "male"}, 40000}
+	h.sayHi()
+	E.sayHi()
+}
