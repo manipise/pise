@@ -1,0 +1,32 @@
+package main
+
+import "fmt"
+
+func main() {
+	ar := "MANIKANTA"
+	lent := len(ar)
+
+	for j := 0; j < lent; j++ {
+		for k := 0; k < j; k++ {
+			fmt.Print(" ")
+		}
+		for i := 0; i < lent-j; i++ {
+			fmt.Print(string(ar[i]), " ")
+		}
+
+		fmt.Println()
+
+	}
+	for j := 0; j < lent; j++ {
+		for k := 0; k < lent-j; k++ {
+			fmt.Print(" ")
+		}
+		for i := 0; i < j; i++ {
+			fmt.Print(string(ar[i]), " ")
+		}
+
+		fmt.Println()
+
+	}
+
+}
