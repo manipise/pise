@@ -1,0 +1,112 @@
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+type student struct {
+	name    string
+	reg_num int
+	marks   int
+}
+
+func main() {
+	var data = [80]student{}
+	var n, choice, reg_num int
+	fmt.Println("Enter the number of records ")
+	fmt.Scan(&n)
+	insert_details(&data, n)
+	for {
+		//		Result_data(data, n, choice, reg_num)
+		fmt.Println("Result Menu")
+		fmt.Println("Press 1 to display all records")
+		fmt.Println("Press 2 to search a record")
+		fmt.Println("Press 3 to display toppers name")
+		fmt.Println("Press 4 to exit")
+		fmt.Println("Enter choice(1-4)")
+		fmt.Scan(&choice)
+		switch choice {
+		case 1:
+			display_records(&data, n)
+		case 2:
+			fmt.Printf("Enter the roll number to search")
+			fmt.Scan(&reg_num)
+			search_data(&data, n, reg_num)
+		case 3:
+			toppers_data(&data, n)
+		case 4:
+			os.Exit(2)
+		}
+
+	}
+
+}
+func Result_data(data *[80]student, n, choice, reg_num int) {
+	fmt.Println("Result Menu")
+	fmt.Println("Press 1 to display all records")
+	fmt.Println("Press 2 to search a record")
+	fmt.Println("Press 3 to display toppers name")
+	fmt.Println("Press 4 to exit")
+	fmt.Println("Enter choice(1-4)")
+	fmt.Scan(&choice)
+	switch choice {
+	case 1:
+		display_records(data, n)
+	case 2:
+		fmt.Printf("Enter the roll number to search")
+		fmt.Scan(&reg_num)
+		search_data(data, n, reg_num)
+	case 3:
+		toppers_data(data, n)
+	case 4:
+		os.Exit(2)
+	}
+
+}
+func insert_details(list *[80]student, s int) {
+	for i := 0; i < s; i++ {
+		fmt.Println("Enter details for record", i+1)
+		fmt.Println("Enter Reg number:")
+		fmt.Scan(&list[i].reg_num)
+		fmt.Println("Enter Name")
+		fmt.Scan(&list[i].name)
+		fmt.Println("Enter Marks")
+		fmt.Scan(&list[i].marks)
+	}
+
+}
+
+func search_data(list *[80]student, s, number int) {
+	for i := 0; i < s; i++ {
+		if list[i].reg_num == number {
+			fmt.Printf("Regno : %d\nName : %s\nMarks : %d\n", list[i].reg_num, list[i].name, list[i].marks)
+		}
+		return
+	}
+	fmt.Println("Records not found")
+
+}
+
+func FindMax(list *[80]student, s int) int {
+	max := list[0].marks
+	for i := 0; i < s; i++ {
+		if list[i].marks > max {
+			max = list[i].marks
+		}
+	}
+	return max
+}
+func toppers_data(list *[80]student, s int) {
+	for i := 0; i < s; i++ {
+		if list[i].marks == FindMax(list, s) {
+			fmt.Println(list[i].name, list[i].reg_num)
+		}
+	}
+}
+func display_records(list *[80]student, s int) {
+	fmt.Println("\n\nREG NUM\tName\tMarks\n")
+	for i := 0; i < s; i++ {
+		fmt.Printf("%d\t%s\t%d\n", list[i].reg_num, list[i].name, list[i].marks)
+	}
+}
