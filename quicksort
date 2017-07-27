@@ -1,0 +1,58 @@
+package main
+
+import (
+	"fmt"
+)
+
+func quicksort(number []int, first, last int) {
+	var i, j, pivot, temp int
+
+	if first < last {
+		pivot = first
+		i = first
+		j = last
+
+		for i < j {
+			for number[i] <= number[pivot] && i < last {
+				i++
+			}
+
+			for number[j] > number[pivot] {
+				j--
+			}
+
+			if i < j {
+				temp = number[i]
+				number[i] = number[j]
+				number[j] = temp
+			}
+		}
+
+		temp = number[pivot]
+		number[pivot] = number[j]
+		number[j] = temp
+		quicksort(number, first, j-1)
+		quicksort(number, j+1, last)
+
+	}
+}
+
+func main() {
+
+	count := 0
+	fmt.Printf("How many elements are u going to enter?: ")
+	fmt.Scanf("%d", &count)
+	number := make([]int, count)
+	fmt.Printf("Enter %d elements: ", count)
+	for i := 0; i < count; i++ {
+		fmt.Scan(&number[i])
+	}
+
+	quicksort(number, 0, count-1)
+
+	fmt.Printf("Order of Sorted elements: ")
+	for i := 0; i < count; i++ {
+		fmt.Printf(" %d", number[i])
+	}
+
+}
