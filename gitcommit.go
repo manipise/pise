@@ -8,9 +8,10 @@ import (
 )
 
 func main() {
-	goPath, err := exec.Command("echo", os.Getenv("GOPATH")).Output()
+	goPath, err := exec.Command("echo", os.Getenv("GOPATH")).CombinedOutput()
 	crPath := strings.Trim(string(goPath), "\n") + "/src/cr"
-	gitPath := exec.Command("git", "commit -m ", "mani")
+	gitPath := exec.Command("git", "commit", "-m ", "mani")
+	gitPath.Dir = crPath
 	gitPath.Dir = crPath
 	res, err := gitPath.Output()
 	fmt.Println(string(res), "Err ", err)
